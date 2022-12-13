@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.33026.149
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwSplashTest", "WpfApp1\TwSplashTest.csproj", "{A8C208E6-F76C-46A9-A4B4-CC68E05A87BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwSplash", "TwSplash\TwSplash.csproj", "{91334E0F-5B37-46A3-B8C8-C0165B04AE82}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8C208E6-F76C-46A9-A4B4-CC68E05A87BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8C208E6-F76C-46A9-A4B4-CC68E05A87BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8C208E6-F76C-46A9-A4B4-CC68E05A87BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8C208E6-F76C-46A9-A4B4-CC68E05A87BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91334E0F-5B37-46A3-B8C8-C0165B04AE82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91334E0F-5B37-46A3-B8C8-C0165B04AE82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91334E0F-5B37-46A3-B8C8-C0165B04AE82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91334E0F-5B37-46A3-B8C8-C0165B04AE82}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {054756ED-594B-4DD9-9051-402EC3B35B27}
+	EndGlobalSection
+EndGlobal
