@@ -7,6 +7,11 @@ It's very early stage, so it's not helpful yet. Only for someone to think about 
 
 A basic usage is following:
 
+(한국어)
+TwSplash는 개인적으로 만들고 있는 WPF DTP 프로그램에서 사용할 Splash 클래스입니다.
+아직 디자인 중이라 별 도움이 안되겠지만, 디자인 패턴을 찾고 있는 분이라면 아이디어 정도는 도움이 될 것입니다. 
+사용법은 아래와 같습니다. 
+
 ````csharp
         public App()
         {
