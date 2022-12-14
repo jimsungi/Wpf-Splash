@@ -7,7 +7,7 @@
          xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
         xmlns:local="clr-namespace:com.tigerword.twsplash"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800"
+        Title="Splash" Height="450" Width="800"
                 Style="{DynamicResource MainWindowStyle}"
         >
     <Window.Resources>
@@ -23,6 +23,6 @@
     </Window.Resources>
 
     <Grid Background="Transparent">
-        
+        <Image x:Name="splash_image"/>
     </Grid>
 </Window>

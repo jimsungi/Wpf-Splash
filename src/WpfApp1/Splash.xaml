@@ -7,8 +7,9 @@
          xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800"
-                Style="{DynamicResource MainWindowStyle}"
+        Title="Window1" Height="260" Width="800"
+                Style="{DynamicResource MainWindowStyle}" WindowStartupLocation="CenterScreen"
+        
         >
     <Window.Resources>
         <Style x:Key="MainWindowStyle" TargetType="{x:Type Window}">

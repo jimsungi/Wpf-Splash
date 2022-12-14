@@ -1,20 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 namespace com.tigerword.twsplash
 {
     public class Splash
     {
-        Type typeOfSplashWindow;
-        Type tyoeOfMainWindow;
-        int sMiliSecond = 5000;
+
+        #region Static Variables
+        private static Thread uiThread = null;
         public static Splash instance = new Splash();
+        static string splash_run_locker = "splash_lock";
+        static bool splash_done = false;
+        static SplashOption splash_option = SplashOption.USE_DEFAULT_SPLASH;
+        enum SplashOption
+        {
+            USE_DEFAULT_SPLASH,
+            USE_SPLASH_IMAGE,
+            USE_USER_SPLASH
+        }
+        #endregion
+        #region Variables
+        Type typeOfSplashWindow=typeof(com.tigerword.twsplash.SplashWindow);
+        Type tyoeOfMainWindow=null;
+        BitmapImage splashImage = null;
+        int sMiliSecond = 5000;
+        System.Windows.Window splashWpfWindow = null;
+        #endregion
         public static Splash Create<wintype>()
         {
             if (instance == null)
@@ -32,19 +51,29 @@ namespace com.tigerword.twsplash
 
         public Splash UseSplash<wintype>()
         {
+            splash_option = SplashOption.USE_USER_SPLASH;
             typeOfSplashWindow = typeof(wintype);
             return instance;
         }
 
-        public Splash UseDefaultSplash()
+
+        public Splash UseImage(BitmapImage image)
         {
-            //typeOfSplashWindow = typeof(wintype);
+            splash_option = SplashOption.USE_SPLASH_IMAGE;
+            splashImage = image;
             return instance;
         }
+
         public Splash UseWindow<wintype>()
         {
             tyoeOfMainWindow = typeof(wintype);
             return this;
+        }
+        public Splash UseDefaultSplash()
+        {
+            splash_option = SplashOption.USE_DEFAULT_SPLASH;
+            typeOfSplashWindow = typeof(com.tigerword.twsplash.SplashWindow);
+            return instance;
         }
 
         public Splash Wait(int mili_second)
@@ -52,16 +81,9 @@ namespace com.tigerword.twsplash
             sMiliSecond = mili_second;
             return this;
         }
-        #region Variables
 
-        private static Thread uiThread = null;
-
-        //private static WpfSplashScreen applicationSplashScreen = null;
-
-        #endregion
         public void Run(List<string> args = null)
         {
-
             uiThread = new Thread(SplashFunction);
 
             uiThread.SetApartmentState(ApartmentState.STA);
@@ -70,47 +92,81 @@ namespace com.tigerword.twsplash
 
             uiThread.Start();
 
-            // You can put your init logique here :             
-            //lock (lock_string)
-            //{
-            //    Thread.Sleep(sMiliSecond);
-            //}
-            
-                while (true)
-                {
-                lock (lock_string)
+           
+            while (true)
+            {
+                lock (splash_run_locker)
                 {
                     if (splash_done)
                         break;
                 }
                 Thread.Sleep(100);
-                }
+            }
             
             Thread.Sleep(sMiliSecond);
             System.Windows.Window mainWpfWindow = (System.Windows.Window)Activator.CreateInstance(tyoeOfMainWindow);
-                //app.InitializeComponent();
             
             splashWpfWindow.Dispatcher.InvokeShutdown();
             splashWpfWindow = null;
-
-
+            mainWpfWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             mainWpfWindow.Show();
             Dispatcher.Run();
         }
-        static string lock_string = "app";
-        static bool splash_done = false;
-        System.Windows.Window splashWpfWindow = null;
+
         private static void SplashFunction()
         {
+            switch(splash_option)
+            {
+ 
+                case SplashOption.USE_USER_SPLASH:
+                    {
+                        instance.splashWpfWindow = (System.Windows.Window)Activator.CreateInstance(instance.typeOfSplashWindow);
+                        instance.splashWpfWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                        instance.splashWpfWindow.Show();
+                    }
+                    break;
+                case SplashOption.USE_SPLASH_IMAGE:
+                    {
+                        if (instance.splashImage == null)
+                            throw new Exception("Splash Image not found");
+                        instance.splashWpfWindow = (System.Windows.Window)Activator.CreateInstance(typeof(com.tigerword.twsplash.SplashWindow));
+                        com.tigerword.twsplash.SplashWindow sWindow = instance.splashWpfWindow as com.tigerword.twsplash.SplashWindow;
+                        if(sWindow !=null)
+                        {
+                            sWindow.SetImage(instance.splashImage);
+                            sWindow.Show();
+                        }
+                        else
+                        {
+                            throw new SplashException("Unknown error");
+                        }
+                    }
+                    break;
+                case SplashOption.USE_DEFAULT_SPLASH:
+                default:
+                    {
+                        if (instance.splashImage == null)
+                            throw new Exception("Splash Image not found");
+                        instance.splashWpfWindow = (System.Windows.Window)Activator.CreateInstance(typeof(com.tigerword.twsplash.SplashWindow));
+                        com.tigerword.twsplash.SplashWindow sWindow = instance.splashWpfWindow as com.tigerword.twsplash.SplashWindow;
+                        if (sWindow != null)
+                        {
+                            sWindow.Show();
+                        }
+                        else
+                        {
+                            throw new SplashException("Unknown error");
+                        }
+                    }
+                    break;                    
+            }
+            
 
-                instance.splashWpfWindow = (System.Windows.Window)Activator.CreateInstance(instance.typeOfSplashWindow);
-                instance.splashWpfWindow.Show();
-            lock (lock_string)
+            lock (splash_run_locker)
             {
                 splash_done = true;
             }
             Dispatcher.Run();
-
         }
     }
 }

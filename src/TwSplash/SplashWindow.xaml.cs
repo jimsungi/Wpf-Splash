@@ -23,5 +23,10 @@ namespace com.tigerword.twsplash
         {
             InitializeComponent();
         }
+
+        public void SetImage(BitmapImage image)
+        {
+            splash_image.Source = image;            
+        }
     }
 }

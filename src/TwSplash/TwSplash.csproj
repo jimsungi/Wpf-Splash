@@ -59,12 +59,13 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Splash.cs" />
+    <Compile Include="SplashException.cs" />
     <Compile Include="SplashWindow.xaml.cs">
       <DependentUpon>SplashWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="img\aronia.png" />
+    <Resource Include="img\aronia.png" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
