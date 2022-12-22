@@ -18,24 +18,26 @@ namespace WpfApp1
             Startup += (sender, args) =>
             {
                 // Type1 : Use WpfApp1.Splash As SplashWindow
+                //com.tigerword.twsplash.Splash
+                //.Create()
+                //.UseSplash<WpfApp1.Splash>()
+                //.UseWindow<WpfApp1.MainWindow>()
+                //.Wait(4000)
+                //.Run();
+                // @TODO Type2 : Use Spash - Default Splash (with default splash image)  As SplashWindow
                 com.tigerword.twsplash.Splash
                 .Create()
-                .UseSplash<WpfApp1.Splash>()
+                .UseDefaultSplash()
                 .UseWindow<WpfApp1.MainWindow>()
                 .Wait(4000)
                 .Run();
-                // @TODO Type2 : Use Spash - Default Splash (with default splash image)  As SplashWindow
-//                com.tigerword.twsplash.Splash
-//.UseDefaultSplash()
-//.UseWindow<WpfApp1.MainWindow>()
-//.Wait(4000)
-//.Run();
                 // @TODO Type3 : Use Image (with default splash window) As SplashWindow
-//                com.tigerword.twsplash.Splash
-//.UseImage()
-//.UseWindow<WpfApp1.MainWindow>()
-//.Wait(4000)
-//.Run();
+                //com.tigerword.twsplash.Splash
+                //.Create()
+                //.UseImage(new System.Windows.Media.Imaging.BitmapImage())
+                //.UseWindow<WpfApp1.MainWindow>()
+                //.Wait(4000)
+                //.Run();
             };
         }
     }

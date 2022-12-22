@@ -24,6 +24,6 @@
     </Window.Resources>
 
     <Grid Background="Transparent">
-        <Image  Source="pack://application:,,,/Resources/aronia.png"/>
+        <Image VerticalAlignment="Stretch"   HorizontalAlignment="Stretch" Source="pack://application:,,,/Resources/aronia.png" Stretch="Fill"/>
     </Grid>
 </Window>

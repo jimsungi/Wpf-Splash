@@ -109,7 +109,9 @@ namespace com.tigerword.twsplash
             splashWpfWindow.Dispatcher.InvokeShutdown();
             splashWpfWindow = null;
             mainWpfWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            mainWpfWindow.Topmost = true;
             mainWpfWindow.Show();
+            
             Dispatcher.Run();
         }
 
@@ -122,40 +124,43 @@ namespace com.tigerword.twsplash
                     {
                         instance.splashWpfWindow = (System.Windows.Window)Activator.CreateInstance(instance.typeOfSplashWindow);
                         instance.splashWpfWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                        instance.splashWpfWindow.Show();
+                        instance.splashWpfWindow.Topmost = true;
+                        instance.splashWpfWindow.Show();                        
                     }
                     break;
                 case SplashOption.USE_SPLASH_IMAGE:
                     {
                         if (instance.splashImage == null)
                             throw new Exception("Splash Image not found");
-                        instance.splashWpfWindow = (System.Windows.Window)Activator.CreateInstance(typeof(com.tigerword.twsplash.SplashWindow));
+                        instance.splashWpfWindow = (com.tigerword.twsplash.SplashWindow)Activator.CreateInstance(typeof(com.tigerword.twsplash.SplashWindow));
                         com.tigerword.twsplash.SplashWindow sWindow = instance.splashWpfWindow as com.tigerword.twsplash.SplashWindow;
                         if(sWindow !=null)
                         {
                             sWindow.SetImage(instance.splashImage);
-                            sWindow.Show();
+                            sWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                            sWindow.Topmost = true;
+                            sWindow.Show();                            
                         }
                         else
                         {
-                            throw new SplashException("Unknown error");
+                            throw new SplashException(SplashOption.USE_SPLASH_IMAGE.ToString() + ": Cannot Create");
                         }
                     }
                     break;
                 case SplashOption.USE_DEFAULT_SPLASH:
                 default:
                     {
-                        if (instance.splashImage == null)
-                            throw new Exception("Splash Image not found");
-                        instance.splashWpfWindow = (System.Windows.Window)Activator.CreateInstance(typeof(com.tigerword.twsplash.SplashWindow));
+                        instance.splashWpfWindow = (com.tigerword.twsplash.SplashWindow)Activator.CreateInstance(typeof(com.tigerword.twsplash.SplashWindow));
                         com.tigerword.twsplash.SplashWindow sWindow = instance.splashWpfWindow as com.tigerword.twsplash.SplashWindow;
                         if (sWindow != null)
                         {
-                            sWindow.Show();
+                            sWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                            sWindow.Topmost = true;
+                            sWindow.Show();                            
                         }
                         else
                         {
-                            throw new SplashException("Unknown error");
+                            throw new SplashException(SplashOption.USE_DEFAULT_SPLASH.ToString() + ": Cannot Create");
                         }
                     }
                     break;                    
