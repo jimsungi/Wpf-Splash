@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.tigerword.twsplash
+namespace com.tigerword.splash
 {
     public class SplashException : Exception
     {

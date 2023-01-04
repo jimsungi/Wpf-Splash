@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace com.tigerword.twsplash
+namespace com.tigerword.splash
 {
     /// <summary>
     /// Window1.xaml에 대한 상호 작용 논리
@@ -27,6 +27,11 @@ namespace com.tigerword.twsplash
         public void SetImage(BitmapImage image)
         {
             splash_image.Source = image;            
+        }
+
+        public void SetImage()
+        {
+            //splash_image.Source = 
         }
     }
 }
