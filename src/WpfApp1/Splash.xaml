@@ -25,5 +25,6 @@
 
     <Grid Background="Transparent">
         <Image VerticalAlignment="Stretch"   HorizontalAlignment="Stretch" Source="pack://application:,,,/Resources/aronia.png" Stretch="Fill"/>
+        <Label Content="Label" HorizontalAlignment="Left" Height="92" Margin="147,60,0,0" VerticalAlignment="Top" Width="494"/>
     </Grid>
 </Window>
